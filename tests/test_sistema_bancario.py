@@ -3,9 +3,9 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from banco import Banco
-from cola import Cola
-from pila import Pila
+from src.banco import Banco
+from src.cola import Cola
+from src.pila import Pila
 
 class TestSistemaBancario(unittest.TestCase):
 

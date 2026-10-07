@@ -1,6 +1,6 @@
 from getpass import getpass
 
-from banco import Banco
+from .banco import Banco
 
 def solicitar_numero_entero(mensaje):
     while True:

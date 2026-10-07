@@ -16,17 +16,25 @@ Proyecto educativo de consola para practicar estructuras de datos, operaciones b
 - **Pila (`Pila`)**: mantiene las acciones recientes en orden LIFO (última en entrar, primera en salir). Incluye `push`, `pop`, `peek`, `esta_vacia` y `len`.
 - **Cola (`Cola`)**: administra los turnos en orden FIFO (primero en entrar, primero en salir), usando `collections.deque`.
 
-## Archivos principales
+## Estructura del proyecto
 
-- `main.py`: punto de entrada del programa.
-- `menu.py`: menú e interacción con la persona usuaria.
-- `banco.py`: registro y búsqueda de clientes, depósitos, retiros e integración de las estructuras.
-- `cliente.py`: datos del cliente y verificación de contraseña.
-- `pila.py`: implementación de la pila para el historial de la sesión.
-- `cola.py`: implementación de la cola para los turnos.
-- `seguridad.py`: creación y verificación de hashes de contraseñas con PBKDF2-HMAC-SHA256 y una sal aleatoria.
-- `registro.py`: lectura y escritura de eventos JSON Lines (JSONL).
-- `pruebas.py`: pruebas automatizadas con `unittest`.
+```text
+.
+├── main.py                  # Lanzador de la aplicación
+├── README.md
+├── historial_banco.jsonl    # Se crea al registrar la primera acción
+├── src/
+│   ├── main.py              # Entrada de la aplicación
+│   ├── menu.py              # Menú de consola
+│   ├── banco.py             # Operaciones y coordinación de estructuras
+│   ├── cliente.py           # Cliente y autenticación
+│   ├── pila.py              # Historial LIFO en memoria
+│   ├── cola.py              # Turnos FIFO
+│   ├── seguridad.py         # Hashes de contraseñas
+│   └── registro.py          # Lectura y escritura JSONL
+└── tests/
+	└── test_sistema_bancario.py
+```
 
 ## Requisitos
 
@@ -34,7 +42,7 @@ Python 3.10 o posterior. El proyecto usa únicamente la biblioteca estándar de 
 
 ## Ejecutar
 
-Desde la carpeta del proyecto, inicia el programa con:
+Desde la carpeta raíz del proyecto, inicia el programa con:
 
 ```sh
 python3 main.py
@@ -44,7 +52,7 @@ En el menú puedes registrar clientes, hacer operaciones con su CI y contraseña
 
 ## Historial en archivo
 
-El banco agrega las acciones exitosas a `historial_banco.jsonl`, ubicado junto a `banco.py`. El archivo se crea automáticamente al realizar la primera acción registrada. Cada línea contiene un objeto JSON independiente con campos como fecha, tipo de acción, CI, detalle, monto y saldo resultante. Por ejemplo:
+El banco agrega las acciones exitosas a `historial_banco.jsonl`, ubicado en la raíz del proyecto. El archivo se crea automáticamente al realizar la primera acción registrada. Cada línea contiene un objeto JSON independiente con campos como fecha, tipo de acción, CI, detalle, monto y saldo resultante. Por ejemplo:
 
 ```json
 {"fecha":"2026-10-07T12:00:00+00:00","accion":"deposito","ci":"111","detalle":"Depósito de Bs. 50.00 para Carlos Silva","monto_bs":50.0,"saldo_bs":150.0}
@@ -55,7 +63,7 @@ La opción 6 del menú muestra los eventos que están en el archivo. Las contras
 ## Ejecutar las pruebas
 
 ```sh
-python3 -m unittest -v pruebas
+python3 -m unittest discover -s tests -v
 ```
 
 Las pruebas comprueban, entre otras cosas, operaciones bancarias, orden LIFO/FIFO, autenticación y persistencia del historial. Usan archivos temporales y no deberían crear un historial de prueba en la carpeta del proyecto.

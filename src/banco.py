@@ -2,10 +2,10 @@ import json
 import math
 from pathlib import Path
 
-from cliente import Cliente
-from cola import Cola
-from pila import Pila
-from registro import RegistroOperaciones
+from .cliente import Cliente
+from .cola import Cola
+from .pila import Pila
+from .registro import RegistroOperaciones
 
 class Banco:
     def __init__(self, ruta_historial=None):
@@ -14,7 +14,7 @@ class Banco:
         self.historial = Pila()
         self.turnos = Cola()
         if ruta_historial is None:
-            ruta_historial = Path(__file__).with_name("historial_banco.jsonl")
+            ruta_historial = Path(__file__).resolve().parent.parent / "historial_banco.jsonl"
         self.registro = RegistroOperaciones(ruta_historial)
 
     def buscar_cliente(self, ci):

@@ -1,4 +1,4 @@
-from seguridad import crear_hash_contrasena, verificar_contrasena
+from .seguridad import crear_hash_contrasena, verificar_contrasena
 
 
 class Cliente:
