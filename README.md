@@ -81,13 +81,13 @@ Las pruebas comprueban, entre otras cosas, operaciones bancarias, orden LIFO/FIF
 ### Entrega de la actividad
 
 1. **Dominio:** sistema bancario.
-2. **Repositorio y branch:** agregar aquí el enlace del repositorio de GitHub y confirmar que la branch de entrega se llama `v2`.
+2. **Repositorio y branch: https://github.com/omargit2001/sistema-bancario/tree/v2. Confirmo que la rama se llama v2.
 3. **Flujo nuevo:** solicitar un turno con prioridad y atenderlo según prioridad, respetando FIFO en empates.
 4. **Familia:** heap.
 5. **La uso porque…** permite obtener el turno de mayor prioridad; el envejecimiento dinámico y la regla antiacaparamiento ayudan a que la espera no relegue indefinidamente a los turnos menos urgentes.
 6. **Caso límite:** si no hay turnos pendientes, `desencolar` y `frente` lanzan `IndexError`; `Banco.atender_turno` informa que no hay turnos y devuelve `None`.
 
-El enlace y la confirmación de la branch deben completarse cuando el proyecto esté publicado en GitHub. Este directorio local no incluye información de un repositorio remoto.
+El proyecto está publicado en GitHub en la rama v2, creada desde v1.
 
 ## Alcance y seguridad
 
