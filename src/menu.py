@@ -88,7 +88,9 @@ def iniciar_menu():
 
         elif opcion == 7:
             ci = input("Ingrese el CI para solicitar turno: ").strip()
-            banco.solicitar_turno(ci)
+            print("Prioridad: 0. Normal | 1. Preferente | 2. Urgente")
+            prioridad = solicitar_numero_entero("Seleccione la prioridad: ")
+            banco.solicitar_turno(ci, prioridad)
 
         elif opcion == 8:
             banco.atender_turno()

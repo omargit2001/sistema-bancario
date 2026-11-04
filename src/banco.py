@@ -3,7 +3,7 @@ import math
 from pathlib import Path
 
 from .cliente import Cliente
-from .cola import Cola
+from .heap_turnos import HeapTurnos
 from .pila import Pila
 from .registro import RegistroOperaciones
 
@@ -12,7 +12,7 @@ class Banco:
         # El CI es la clave para buscar clientes en tiempo promedio constante.
         self.clientes = {}
         self.historial = Pila()
-        self.turnos = Cola()
+        self.turnos = HeapTurnos()
         if ruta_historial is None:
             ruta_historial = Path(__file__).resolve().parent.parent / "historial_banco.jsonl"
         self.registro = RegistroOperaciones(ruta_historial)
@@ -140,18 +140,24 @@ class Banco:
         print(f"Retiro exitoso. Nuevo saldo: Bs. {cliente.saldo:.2f}")
         return True
 
-    def solicitar_turno(self, ci):
+    def solicitar_turno(self, ci, prioridad=HeapTurnos.PRIORIDAD_NORMAL):
         cliente = self.buscar_cliente(ci)
         if cliente is None:
             print("Error: Cliente no encontrado.")
+            return False
+
+        try:
+            HeapTurnos.validar_prioridad(prioridad)
+        except ValueError as error:
+            print(f"Error: {error}")
             return False
 
         detalle = f"Turno solicitado por {cliente.nombre} {cliente.apellido}"
         if not self._guardar_evento("solicitud_turno", ci, detalle):
             return False
 
-        self.turnos.encolar(ci)
-        print(f"Turno agregado a la cola. Posición: {len(self.turnos)}")
+        self.turnos.encolar(ci, prioridad)
+        print(f"Turno agregado. Turnos pendientes: {len(self.turnos)}")
         return True
 
     def atender_turno(self):
